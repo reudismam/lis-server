@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 
 import DiscentDAO from '../dao/DiscentDAO';
+import Area from '../models/Area';
 import Discent from '../models/Discent';
 
 class DiscentController {
@@ -16,8 +17,15 @@ class DiscentController {
             category,
             occupation,
             degree,
-            bio
+            bio,
+            areas
         } = req.body;
+
+        const areasItems = areas.map((area:string) => {
+            return {name: area};
+        });
+
+        console.log(areasItems);
 
         const data: Discent = {
             name,
@@ -28,7 +36,8 @@ class DiscentController {
             category,
             occupation,
             degree,
-            bio
+            bio,
+            areas: areasItems
         }
         const discent = await this.discentDAO.create(data);
         return res.status(201).json(discent);

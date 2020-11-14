@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Area from './Area';
 
 @Entity('discentes')
 class Discent {
@@ -22,6 +23,11 @@ class Discent {
     degree: string;
     @Column()
     bio: string;
+    @OneToMany(()=>Area, area => area.discent, {
+        cascade: ['insert', 'update']
+    })
+    @JoinColumn({name: "discente_id"})
+    areas: Area[];
 }
 
 export default Discent;

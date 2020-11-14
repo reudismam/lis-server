@@ -12,7 +12,9 @@ class DiscentDAO {
 
     async read(): Promise<Discent[]> {
         const repository = getRepository(Discent);
-        const discents = await repository.find();
+        const discents = await repository.find({
+            relations: ["areas"]
+        });
         return discents;
     }
 
