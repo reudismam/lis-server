@@ -1,10 +1,10 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class createAreas1605360974478 implements MigrationInterface {
+export class discenteProjeto1605399635602 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         queryRunner.createTable(new Table({
-            name: 'areas',
+            name: "discente_projeto",
             columns: [
                 {
                     name: 'id',
@@ -15,29 +15,37 @@ export class createAreas1605360974478 implements MigrationInterface {
                     generationStrategy: 'increment'
                 },
                 {
-                    name: 'name',
-                    type: 'varchar',
+                    name: 'discentes_id',
+                    type: 'integer'
                 },
                 {
-                    name: 'discente_id',
+                    name: 'projetos_id',
                     type: 'integer'
                 }
             ],
             foreignKeys: [
                 {
-                    name: "discente_id",
-                    columnNames: ['discente_id'],
+                    name: 'discentes_id',
+                    columnNames: ['discentes_id'],
                     referencedTableName: 'discentes',
                     referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
-                    onDelete: 'CASCADE',
+                    onDelete: 'CASCADE'
+                },
+                {
+                    name: 'projetos_id',
+                    columnNames: ['projetos_id'],
+                    referencedTableName: 'projetos',
+                    referencedColumnNames: ['id'],
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
                 }
             ]
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.dropTable("areas");
+        queryRunner.dropTable("discente_projeto");
     }
 
 }
