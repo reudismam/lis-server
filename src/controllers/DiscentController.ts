@@ -4,6 +4,7 @@ import DiscentDAO from '../dao/DiscentDAO';
 import Area from '../models/Area';
 import Discent from '../models/Discent';
 import Project from '../models/Project';
+import Image from '../models/Image';
 
 class DiscentController {
     discentDAO: DiscentDAO = new DiscentDAO();
@@ -19,24 +20,17 @@ class DiscentController {
             occupation,
             degree,
             bio,
-<<<<<<< HEAD
-            areas
-        } = req.body;
-          
-        const areasObjs:Area[] = areas.map((area:string) => {
-            return {name: area}
-        });
-        
-=======
             areas,
-            projects
+            projects,
+            photo
         } = req.body;
 
         const areasObjs = areas.map((area:string) => {
             return {name: area};
         });
 
->>>>>>> onetomany
+        const image:Image = {image: photo}
+
         const data: Discent = {
             name,
             lastname,
@@ -47,12 +41,9 @@ class DiscentController {
             occupation,
             degree,
             bio,
-<<<<<<< HEAD
-            areas: areasObjs
-=======
             areas: areasObjs,
-            projects
->>>>>>> onetomany
+            projects,
+            photo: image
         }
         const discent = await this.discentDAO.create(data);
         return res.status(201).json(discent);

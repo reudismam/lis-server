@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import Area from './Area';
 import Project from "./Project";
+import Image from './Image';
 
 @Entity('discentes')
 class Discent {
@@ -45,6 +46,11 @@ class Discent {
         }
     })
     projects: Project [];
+    @OneToOne(()=>Image, {
+        cascade: ['insert', 'update']
+    })
+    @JoinColumn({name: "image_id"})
+    photo: Image
 }
 
 export default Discent;
