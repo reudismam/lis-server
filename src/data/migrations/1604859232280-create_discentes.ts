@@ -49,6 +49,20 @@ export class createDiscentes1604857887807 implements MigrationInterface {
                 {
                     name: 'bio',
                     type: 'text'
+                },
+                {
+                    name: 'image_id',
+                    type: 'integer'
+                }
+            ],
+            foreignKeys: [
+                {
+                    name: 'image_id',
+                    columnNames: ['image_id'],
+                    referencedTableName: 'images',
+                    referencedColumnNames: ['id'],
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
                 }
             ]
         }));
