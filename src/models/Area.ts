@@ -1,16 +1,16 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Discent from "./Discent";
 
-@Entity("areas")
+@Entity('areas')
 class Area {
     @PrimaryGeneratedColumn()
-    id:number;
+    id: number;
     @Column()
-    name:string;
+    name: string;
 
-    @ManyToOne(()=>Discent, discent => discent.areas)
-    @JoinColumn({name:'discente_id'})
-    discent:Discent
+    @ManyToOne(() => Discent, discent => discent.areas)
+    @JoinColumn({name: "discente_id"})
+    discent: Discent
 }
 
 export default Area;

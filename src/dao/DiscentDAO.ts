@@ -13,7 +13,11 @@ class DiscentDAO {
     async read(): Promise<Discent[]> {
         const repository = getRepository(Discent);
         const discents = await repository.find({
+<<<<<<< HEAD
             relations: ['areas']
+=======
+            relations: ["areas", "projects"]
+>>>>>>> onetomany
         });
         return discents;
     }
