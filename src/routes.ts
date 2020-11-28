@@ -9,4 +9,7 @@ routes.route('/discent')
 .get(discentController.read)
 .post(discentController.create);
 
+routes.route('/discent/:id')
+.put(discentController.update);
+
 export default routes;

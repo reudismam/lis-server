@@ -16,6 +16,10 @@ class Project {
         cascade: ['insert', 'update']
     })
     discents: Discent [];
+
+    equals(project: Project) {
+        return this.title === project.title;
+    }
 }
 
 export default Project;
