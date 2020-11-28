@@ -1,5 +1,6 @@
 import { response } from 'express';
 import { getRepository } from 'typeorm';
+import Area from '../models/Area';
 import Discent from '../models/Discent';
 
 class DiscentDAO {
@@ -16,6 +17,14 @@ class DiscentDAO {
             relations: ["areas", "projects", "photo"]
         });
         return discents;
+    }
+
+    async readById(id:number) {
+        const repository = getRepository(Discent);
+        const discent = await repository.findOneOrFail(id, {
+            relations: ['areas', 'projects', 'photo']
+        });
+        return discent;
     }
 }
 
