@@ -23,17 +23,14 @@ class DiscentController {
             degree,
             bio,
             areas,
-            projects,
-            photo
+            projects
         } = req.body;
 
         const areasObjs = areas.map((area:string) => {
             return {name: area};
         });
 
-        const image:Image = {image: photo}
-
-        const data: Discent = {
+        let data: Discent = {
             name,
             lastname,
             email,
@@ -44,8 +41,13 @@ class DiscentController {
             degree,
             bio,
             areas: areasObjs,
-            projects,
-            photo: image
+            projects
+        }
+
+        const photo = req.file as Express.Multer.File;
+        if (photo) {
+            let image = {image: photo.filename};
+            data = {...data, photo: image}
         }
         const discent = await this.discentDAO.create(data);
         return res.status(201).json(discent);
