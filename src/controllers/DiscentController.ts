@@ -127,6 +127,13 @@ class DiscentController {
         const updated = await this.readById(req, res);
         res.json(updated);
     }
+
+    delete = (req:Request, res:Response) => {
+        const {id} = req.params;
+        this.discentDAO.remove(Number(id));
+        res.json(`O discente com id ${id} foi removido`);
+    }
+
 }
 
 export default DiscentController;

@@ -26,6 +26,11 @@ class DiscentDAO {
         });
         return discent;
     }
+
+    async remove(id:number) {
+        const repository = getRepository(Discent);
+        const removed = await repository.delete(id);
+    }
 }
 
 export default DiscentDAO;
