@@ -9,11 +9,15 @@
   },
   "dependencies": {
     "@types/express": "^4.17.8",
+    "@types/multer": "^1.4.4",
     "@types/typescript": "^2.0.0",
     "express": "^4.17.1",
+    "multer": "^1.4.2",
     "sqlite3": "^5.0.0",
     "ts-node-dev": "^1.0.0",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.2.29",
+    "uuidv4": "^6.2.5",
+    "v4": "^0.0.1"
   },
   "devDependencies": {
     "typescript": "^4.0.5"
