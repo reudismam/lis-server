@@ -23,12 +23,20 @@ class DiscentController {
             degree,
             bio,
             areas,
-            projects
+            projects,
+            publications
         } = req.body;
 
-        const areasObjs = areas.map((area:string) => {
-            return {name: area};
-        });
+        const publicationArray = JSON.parse(publications);
+        console.log(publicationArray);
+
+        let areasObjs:Area[] = [];
+        if (areas) {
+            const areasArray:string[] = Array.from(areas);
+            areasObjs = areasArray.map((area:string) => {
+                return {name: area};
+            });
+        }
 
         let data: Discent = {
             name,
@@ -97,7 +105,7 @@ class DiscentController {
             photo
         } = req.body;
 
-        const providedDate = {
+        const providedData = {
             name,
             lastname,
             email,
@@ -112,7 +120,7 @@ class DiscentController {
         }
         
         let data = {};
-        Object.entries(providedDate).forEach((v) => {
+        Object.entries(providedData).forEach((v) => {
             const [key, value] = v;
             if (value) {
                 data = {...data, [key]:value}
