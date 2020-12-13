@@ -50,7 +50,7 @@ class Discent {
         cascade: ['insert', 'update']
     })
     @JoinColumn({name: "image_id"})
-    photo: Image
+    photo?: Image
 }
 
 export default Discent;

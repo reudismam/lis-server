@@ -8,10 +8,9 @@ import Project from '../models/Project';
 import Image from '../models/Image';
 import GenericDAO from '../dao/GenericDAO';
 
-class DiscentController {
-    discentDAO: GenericDAO<Discent> = new GenericDAO(Discent);
-    areaDAO: GenericDAO<Area> = new GenericDAO(Area);
-    discentRelations:string[] = ["areas", "projects", "photo"];
+class ProjectController {
+    projectDAO: GenericDAO<Project> = new GenericDAO(Project);
+    areaDAO: GenericDAO<Project> = new GenericDAO(Project);
 
     create = async (req:Request, res:Response) => {
         const {
@@ -60,25 +59,25 @@ class DiscentController {
             let image = {image: photo.filename};
             data = {...data, photo: image}
         }
-        const discent = await this.discentDAO.create(data);
+        const discent = await this.projectDAO.create(data);
         return res.status(201).json(discent);
     }
 
     read = async (req:Request, res:Response) => {
-       const discents = await this.discentDAO.read(this.discentRelations);
+       const discents = await this.projectDAO.read();
        return res.json(discents);
     }
 
     readById = async (req:Request, res:Response) => {
         const {id} = req.params;
-        const discent = await this.discentDAO.readById(Number(id), this.discentRelations);
+        const discent = await this.projectDAO.readById(Number(id));
         return discent;
     }
 
     async createOrUpdateArea(areas:Area[], discent: Discent) {
         for (let area of areas) {
             area.discent = discent;
-            await this.areaDAO.create(area);
+            await this.areaDAO.createArea(area);
         };
     }
 
@@ -88,7 +87,7 @@ class DiscentController {
             !areas.some(areaObj => areaObj.id && areaObj.id == area.id)
         );
         for (let area of toRemove) {
-            await this.areaDAO.delete(area);
+            await this.areaDAO.deleteArea(area);
         }
     }
 
@@ -131,7 +130,7 @@ class DiscentController {
         });
         let discent = await this.readById(req, res);
         discent = {...discent, ...data};
-        await this.discentDAO.create(discent);
+        await this.projectDAO.create(discent);
         if (areas) {
             const areasProvided:Area[] = areas;
             await this.createOrUpdateArea(areasProvided, discent);
@@ -143,7 +142,7 @@ class DiscentController {
 
     delete = async (req:Request, res:Response) => {
         const {id} = req.params;
-        await this.discentDAO.remove(Number(id));
+        await this.projectDAO.remove(Number(id));
         res.json(`O discente com id ${id} foi removido.`);
     }
 }

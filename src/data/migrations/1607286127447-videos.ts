@@ -1,10 +1,10 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class projetos1605399391966 implements MigrationInterface {
+export class videos1607286127447 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         queryRunner.createTable(new Table({
-            name: "projetos",
+            name: "videos",
             columns: [
                 {
                     name: 'id',
@@ -19,12 +19,12 @@ export class projetos1605399391966 implements MigrationInterface {
                     type: 'varchar'
                 },
                 {
-                    name: 'year',
-                    type: 'integer'
+                    name: 'video',
+                    type: 'varchar'
                 },
                 {
-                    name: 'situation',
-                    type: 'varchar'
+                    name: 'year',
+                    type: 'integer'
                 },
                 {
                     name: 'featured',
@@ -33,27 +33,13 @@ export class projetos1605399391966 implements MigrationInterface {
                 {
                     name: 'description',
                     type: 'text'
-                },
-                {
-                    name: 'image_id',
-                    type: 'integer'
-                }
-            ],
-            foreignKeys: [
-                {
-                    name: 'image_id',
-                    columnNames: ['image_id'],
-                    referencedTableName: 'images',
-                    referencedColumnNames: ['id'],
-                    onUpdate: 'CASCADE',
-                    onDelete: 'CASCADE'
                 }
             ]
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.dropTable("projetos");
+        queryRunner.dropTable("videos");
     }
 
 }
